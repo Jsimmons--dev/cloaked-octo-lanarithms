@@ -1,0 +1,6 @@
+If there are multiple ways to make this happen, tie breakers are,
+in decreasing order of precedence,
+* Minimize the total width of the rearranged paragraph.
+                             * Minimize the total number of inserted blanks.
+* Start the target phrase as close to the top of the paragraph as possible.
+* Start the target phrase as close to the left as possible.

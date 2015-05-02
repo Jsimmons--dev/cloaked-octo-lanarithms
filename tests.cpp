@@ -1,16 +1,28 @@
-#include "whattotest.cpp"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include "vertiWords.cpp"
 #include <gtest/gtest.h>
+using namespace std;
 
-TEST(SquareRootTest, PositiveNos) {
-	ASSERT_EQ(6, squareRoot(36.0));
-	ASSERT_EQ(18.0, squareRoot(324.0));	
-	ASSERT_EQ(25.4, squareRoot(645.16));	
-	ASSERT_EQ(0, squareRoot(0.0));	
+TEST(VertiWordTest, SingleInput) {
+	string solString = "";
+	string line;
+	ifstream solFile ("testFiles/test1_sol.txt");
+	while (getline(solFile, line)) {
+		solString += line;
+	}
+	EXPECT_EQ(solString, vertiSolve("testFiles/test1.txt"));
 }
 
-TEST(SquareRootTest, NegativeNos) {
-	ASSERT_EQ(-1.0, squareRoot(-15.0));
-	ASSERT_EQ(-1.0, squareRoot(-0.2));
+TEST(VertiWordTest, MultiInput) {
+	string solString = "";
+	string line;
+	ifstream solFile ("testFiles/test2_sol.txt");
+	while (getline(solFile, line)) {
+		solString += line;
+	}
+	EXPECT_EQ(solString, vertiSolve("testFiles/test2.txt"));
 }
 
 int main(int argc, char **argv) {
