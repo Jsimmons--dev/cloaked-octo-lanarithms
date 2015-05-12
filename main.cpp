@@ -5,10 +5,11 @@
 using namespace std;
 
 struct matchTreeNode {
+int x;
+int y;
 struct matchTreeNode *child;
 struct matchTreeNode *parent;
 };
-
 
 void readIn(string (&rows)[INPUT_ROWS])
 {
@@ -19,41 +20,11 @@ void readIn(string (&rows)[INPUT_ROWS])
         rows[i] = current;
     }
 }
-void printInput(string (&rows)[INPUT_ROWS])
-{
-    for(size_t i = 0;i<INPUT_ROWS;++i)
-    {
-    cout << rows[i]  << endl;
-    }
-}
-
-vector<string> extract(string (&rows)[INPUT_ROWS],size_t &start)
-{
-    vector<string> problem;
-    string current = " ";
-    for(size_t i = start; i < INPUT_ROWS && rows[i] != ""; ++i)
-    {
-        problem.push_back(rows[i]);
-        start++;
-    }
-    start++;
-    return problem;
-}
-
-vector<string> printProb(vector<string> problem)
-{
-    for(vector<string>::iterator it = problem.begin();it != problem.end();++it)
-    {
-        cout << *it << endl;
-    }
-    cout << endl;
-    return problem;
-}
 
 
-bool ending(vector<string> problem)
+bool ending(vector<string> end)
 {
-    return (problem.at(0).compare("END") == 0) ? true : false;
+    return (end.at(0).compare("END") == 0) ? true : false;
 }
 
 vector<string> solve(vector<string> problem)
@@ -68,14 +39,55 @@ vector<string> solve(vector<string> problem)
     return problem;
 }
 
+vector<vector < string > > extractProblems(string (&rows)[INPUT_ROWS])
+{
+    size_t start = 0;
+    vector<vector< string > > problems;
+    bool ender = false;
+    while(!ender)
+    {
+        vector<string> problem;
+        for(size_t i = start; i < INPUT_ROWS && rows[i] != ""; ++i)
+        {
+           problem.push_back(rows[i]);
+           start++;
+        }
+        start++;
+        problems.push_back(problem);
+        ender = ending(problem);
+    }
+
+    return problems;
+
+}
+
+void solveProblem(vector<string> &problem)
+{
+    problem.erase (problem.begin());
+    for(vector<string>::iterator it = problem.begin();it != problem.end();++it)
+    {
+        *it = "solved";
+    }
+}
+
 int main()
 {
     string rows[INPUT_ROWS];
     readIn(rows);
     size_t pos = 0;
-    do
+    bool finished = false;
+    vector<vector< string > > problems =  extractProblems(rows);
+    for (vector<string> &v : problems)
     {
-        printProb(solve(extract(rows,pos)));
-    } while (!ending(printProb(solve(extract(rows,pos)))));
+        solveProblem(v);
+    }
+    for (const vector<string> &v : problems)
+    {
+        for (string problemLine : v)
+        {
+            cout << problemLine << endl;
+        }
+        cout << endl;
+    }
 
 }
