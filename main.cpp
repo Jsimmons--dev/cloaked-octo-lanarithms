@@ -21,7 +21,6 @@ void readIn(string (&rows)[INPUT_ROWS])
     }
 }
 
-
 bool ending(vector<string> end)
 {
     return (end.at(0).compare("END") == 0) ? true : false;
@@ -56,9 +55,7 @@ vector<vector < string > > extractProblems(string (&rows)[INPUT_ROWS])
         problems.push_back(problem);
         ender = ending(problem);
     }
-
     return problems;
-
 }
 
 void solveProblem(vector<string> &problem)
@@ -89,5 +86,4 @@ int main()
         }
         cout << endl;
     }
-
 }
