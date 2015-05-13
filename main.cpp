@@ -1,15 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "MatchTreeNode.hpp"
 #define INPUT_ROWS 20
 using namespace std;
 
-struct matchTreeNode {
-int x;
-int y;
-struct matchTreeNode *child;
-struct matchTreeNode *parent;
-};
 
 void readIn(string (&rows)[INPUT_ROWS])
 {
@@ -67,6 +62,34 @@ void solveProblem(vector<string> &problem)
     }
 }
 
+vector<MatchTreeNode*> extractMatches(vector<string> &problem)
+{
+    vector<MatchTreeNode*> matches;
+    string keyword = problem[0];
+    int itPos = 0;
+    for(vector<string>::iterator it = problem.begin()+1; it!=problem.end(); ++it)
+    {
+        string problemLine = *it;
+       for(int i = 0; i<problemLine.length();i++)
+       {
+            if(problemLine[i] == keyword[0])
+            {
+                int x = itPos;
+                int y = i;
+                MatchTreeNode* newMatch = new MatchTreeNode(x,y);
+                cout << problemLine[i] << endl;
+                matches.push_back(newMatch);
+            }
+       }
+       itPos++;
+    }
+    for(int i = 0;i<matches.size();i++)
+    {
+        matches[i]->printNode();
+    }
+    return matches;
+}
+
 int main()
 {
     string rows[INPUT_ROWS];
@@ -76,14 +99,14 @@ int main()
     vector<vector< string > > problems =  extractProblems(rows);
     for (vector<string> &v : problems)
     {
-        solveProblem(v);
+        extractMatches(v);
     }
-    for (const vector<string> &v : problems)
-    {
-        for (string problemLine : v)
-        {
-            cout << problemLine << endl;
-        }
-        cout << endl;
-    }
+//    for (const vector<string> &v : problems)
+//    {
+//        for (string problemLine : v)
+//        {
+//            cout << problemLine << endl;
+//        }
+//        cout << endl;
+//    }
 }
