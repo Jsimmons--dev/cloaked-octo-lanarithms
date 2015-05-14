@@ -24,7 +24,7 @@ TEST(VertiWordTest,MatchTreePlaceNFind)
     EXPECT_EQ(1,node.getChild(0)->getChild(0)->getY());
 }
 
-TEST(VertWordTest,testBasicMatchTree)
+TEST(VertiWordTest,testBasicMatchTree)
 {
     MatchTreeNode node = MatchTreeNode(2,5);
     MatchTreeNode nodeOther = MatchTreeNode(2,6);
@@ -56,6 +56,24 @@ TEST(VertWordTest,testBasicMatchTree)
 
     EXPECT_EQ(false,root1.equals(&root2));
 
+}
+
+TEST(VertiWordTest,extractMatch)
+{
+    MatchTreeNode rootSol = MatchTreeNode(0,0);
+    MatchTreeNode child1 = MatchTreeNode(1,0);
+    MatchTreeNode child1_1 = MatchTreeNode(2,0);
+    
+    rootSol.addChild(&child1);
+    child1.addChild(&child1_1);
+
+//    string rows[20];
+//    readIn(rows);
+//    vector<vector< string > > problems = extractProblems(rows);
+//    vector<MatchTreeNode*> matches = extractMatches(problems[0]);
+//    MatchTreeNode* firstMatch = matches[0];
+//
+//    EXPECT_EQ(true,rootSol.equals(firstMatch));
 }
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
