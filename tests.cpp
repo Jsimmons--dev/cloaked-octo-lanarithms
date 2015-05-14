@@ -5,49 +5,57 @@
 #include <vector>
 #include "MatchTreeNode.hpp"
 using namespace std;
-
-//TEST(VertiWordTest, SingleInput) {
-//	string solString = "";
-//	string line;
-//	ifstream solFile ("testFiles/test1_sol.txt");
-//	while (getline(solFile, line)) {
-//		solString += line;
-//	}
-//	EXPECT_EQ(solString, vertiSolve("testFiles/test1.txt"));
-//}
-//
-//TEST(VertiWordTest, MultiInput) {
-//	string solString = "";
-//	string line;
-//	ifstream solFile ("testFiles/test2_sol.txt");
-//	while (getline(solFile, line)) {
-//		solString += line;
-//	}
-//	EXPECT_EQ(solString, vertiSolve("testFiles/test2.txt"));
-//}
 TEST(VertiWordTest,MatchTreePlaceNFind)
 {
     MatchTreeNode node = MatchTreeNode(1,5);
     MatchTreeNode  nodeC = MatchTreeNode(2,6);
     node.addChild(&nodeC);
-    EXPECT_EQ(2,node.getChild(0)->getX());
-    EXPECT_EQ(6,node.getChild(0)->getY());
     MatchTreeNode nodeC2  = MatchTreeNode(2,5);
     node.addChild(&nodeC2);
     MatchTreeNode nodeCC = MatchTreeNode(3,1);
     node.getChild(0)->addChild(&nodeCC);
-
-    //node.getChild(0)->printChildren();
+    MatchTreeNode* childOfNode = node.getChild(0);
+    
+    EXPECT_EQ(2,node.getChild(0)->getX());
+    EXPECT_EQ(6,node.getChild(0)->getY());
     EXPECT_EQ(2,node.getChild(1)->getX());
     EXPECT_EQ(3,nodeC.getChild(0)->getX());
-    MatchTreeNode* childOfNode = node.getChild(0);
     EXPECT_EQ(3,childOfNode->getChild(0)->getX());
     EXPECT_EQ(1,node.getChild(0)->getChild(0)->getY());
 }
 
 TEST(VertWordTest,testBasicMatchTree)
 {
+    MatchTreeNode node = MatchTreeNode(2,5);
+    MatchTreeNode nodeOther = MatchTreeNode(2,6);
+
+    EXPECT_EQ(false,node.equals(&nodeOther));
+
+    MatchTreeNode nodeSame = MatchTreeNode(2,5);
+
+    EXPECT_EQ(true,node.equals(&nodeSame));
+
+    MatchTreeNode root1 = MatchTreeNode(1,2);
+    MatchTreeNode child1_1 = MatchTreeNode(3,4);
+    root1.addChild(&child1_1);
+
+    MatchTreeNode root2 = MatchTreeNode(1,2);
+    MatchTreeNode child2_1 = MatchTreeNode(3,4);
+    root2.addChild(&child2_1);
+
+    MatchTreeNode root3 = MatchTreeNode(1,2);
+    MatchTreeNode child3_1 = MatchTreeNode(3,5);
+    root3.addChild(&child3_1);
+
+    EXPECT_EQ(true, root1.equals(&root2)) << "trees should be equal with eql vals";
+    EXPECT_EQ(true,root2.equals(&root1)) << "equals should be the same both ways";
+    EXPECT_EQ(false,root1.equals(&root3));
     
+    MatchTreeNode child2_2 = MatchTreeNode(4,5);
+    root2.addChild(&child2_2);
+
+    EXPECT_EQ(false,root1.equals(&root2));
+
 }
 int main(int argc, char **argv) {
 	testing::InitGoogleTest(&argc, argv);
