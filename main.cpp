@@ -2,7 +2,6 @@
 #include <string>
 #include <vector>
 #include "MatchTree.hpp"
-
 #include "MatchTreeNode.hpp"
 
 #define INPUT_ROWS 20
@@ -75,16 +74,38 @@ vector<MatchTree*> extractMatches(vector<string> &problem)
         string problemLine = *it;
        for(int i = 0; i<problemLine.length();i++)
        {
-            if(problemLine[i] == keyword[0])
-            {
-                int x = itPos;
-                int y = i;
-                MatchTree* newMatchTree = new MatchTree(x,y, keyword[0], keyword[1]);
-                cout << problemLine[i] << endl;
-                matches.push_back(newMatchTree);
-            }
-            //scan all leaves of all trees for nextChar match with problemLine[i]
-            //if match, add child Node to that leaf with thisChar = problemLine[i], nextChar = keyword[leaf.getKeywordIndex + 1]
+            size_t found = keyword.find(problemLine[i]);
+            if(found!=string::npos ){
+              cout << "Possible match: " << problemLine[i] << endl;
+
+                if(problemLine[i] == keyword[0])
+                {
+                    int x = itPos;
+                    int y = i;
+                    MatchTree* newMatchTree = new MatchTree(x,y, keyword[0], keyword[1]);
+                    cout << problemLine[i] << endl;
+                    matches.push_back(newMatchTree);
+                }
+                //scan all leaves of all trees for nextChar match with problemLine[i]
+                //if match, add child Node to that leaf with thisChar = problemLine[i], nextChar = keyword[leaf.getKeywordIndex + 1]
+                //and pop that leaf of leaves vector
+                for(vector<MatchTree*>::iterator treeItr = matches.begin(); treeItr!=matches.end(); ++treeItr)
+                {
+                  MatchTree* tree = *treeItr;
+                  vector<MatchTreeNode*>* leaves = tree->getLeaves();
+                  for(vector<MatchTreeNode*>::iterator leafItr = leaves->begin(); leafItr!=leaves->end(); ++leafItr)
+                  {
+                    MatchTreeNode* leaf = *leafItr;
+                    cout << "Leaf " << leaf->getChar() << " needs " << leaf->getNextChar() << endl;
+                    if(problemLine[i] == leaf->getNextChar()){
+                      cout << "Leaf match found!" << endl;
+                      int leafKWI = leaf->getKeywordIndex();
+                      MatchTreeNode* newNode = new MatchTreeNode(itPos, i, leafKWI +1,leaf->getNextChar(), keyword[leafKWI + 1], leaves);
+                      leaf->addChild(newNode);
+                    }
+                  }
+                }
+          }
        }
        itPos++;
     }

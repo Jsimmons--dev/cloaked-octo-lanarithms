@@ -15,7 +15,7 @@ class MatchTreeNode {
     std::vector<MatchTreeNode*> parents;
     std::vector<MatchTreeNode*> children;
     public:
-        MatchTreeNode(int,int,int, char, char, std::vector<MatchTreeNode*>);
+        MatchTreeNode(int,int,int, char, char, std::vector<MatchTreeNode*>*);
         std::vector<MatchTreeNode*> getParents();
         std::vector<MatchTreeNode*> getChildren();
         MatchTreeNode* getChild(int);

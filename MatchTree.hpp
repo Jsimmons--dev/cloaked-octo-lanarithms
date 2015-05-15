@@ -10,7 +10,7 @@ class  MatchTree {
     MatchTreeNode* root;
   public:
     MatchTree(int,int,char,char);
-    std::vector<MatchTreeNode*> getLeaves();
+    std::vector<MatchTreeNode*>* getLeaves();
     MatchTreeNode* getRoot();
 };
 

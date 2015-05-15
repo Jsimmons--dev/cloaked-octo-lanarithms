@@ -2,14 +2,15 @@
 
 
 using namespace std;
-MatchTreeNode::MatchTreeNode(int initX, int initY, int kwi, char thisc, char nextc, vector<MatchTreeNode*> leaves)
+MatchTreeNode::MatchTreeNode(int initX, int initY, int kwi, char thisc, char nextc, vector<MatchTreeNode*>* leaves)
 {
     x = initX;
     y = initY;
     keywordIndex = kwi;
     thisChar = thisc;
     nextChar = nextc;
-    leaves.push_back(this);
+    leaves->push_back(this);
+    cout << "MatchTreeNode created" << endl;
 }
 
 vector<MatchTreeNode*> MatchTreeNode::getParents()
