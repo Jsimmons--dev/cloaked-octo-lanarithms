@@ -2,10 +2,11 @@
 
 
 using namespace std;
-MatchTreeNode::MatchTreeNode(int initX, int initY, char thisc, char nextc, vector<MatchTreeNode*> leaves)
+MatchTreeNode::MatchTreeNode(int initX, int initY, int kwi, char thisc, char nextc, vector<MatchTreeNode*> leaves)
 {
     x = initX;
     y = initY;
+    keywordIndex = kwi;
     thisChar = thisc;
     nextChar = nextc;
     leaves.push_back(this);
@@ -63,6 +64,11 @@ return x;
 int MatchTreeNode::getY()
 {
 return y;
+}
+
+int MatchTreeNode::getKeywordIndex()
+{
+return keywordIndex;
 }
 
 char MatchTreeNode::getChar() {

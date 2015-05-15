@@ -3,7 +3,7 @@
 
 using namespace std;
 MatchTree::MatchTree(int initX, int initY, char thisc, char nextc){
-    root = new MatchTreeNode(initX, initY, thisc, nextc, leaves);
+    root = new MatchTreeNode(initX, initY, 0, thisc, nextc, leaves);
 }
 
 vector<MatchTreeNode*> MatchTree::getLeaves()

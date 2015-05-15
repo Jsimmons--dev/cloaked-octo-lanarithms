@@ -83,7 +83,8 @@ vector<MatchTree*> extractMatches(vector<string> &problem)
                 cout << problemLine[i] << endl;
                 matches.push_back(newMatchTree);
             }
-
+            //scan all leaves of all trees for nextChar match with problemLine[i]
+            //if match, add child Node to that leaf with thisChar = problemLine[i], nextChar = keyword[leaf.getKeywordIndex + 1]
        }
        itPos++;
     }

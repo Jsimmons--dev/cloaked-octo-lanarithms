@@ -9,12 +9,13 @@
 class MatchTreeNode {
     int x;
     int y;
+    int keywordIndex;
     char thisChar;
     char nextChar;
     std::vector<MatchTreeNode*> parents;
     std::vector<MatchTreeNode*> children;
     public:
-        MatchTreeNode(int,int, char, char, std::vector<MatchTreeNode*>);
+        MatchTreeNode(int,int,int, char, char, std::vector<MatchTreeNode*>);
         std::vector<MatchTreeNode*> getParents();
         std::vector<MatchTreeNode*> getChildren();
         MatchTreeNode* getChild(int);
@@ -22,6 +23,7 @@ class MatchTreeNode {
         bool equals(MatchTreeNode*);
         int getX();
         int getY();
+        int getKeywordIndex();
         char getChar();
         char getNextChar();
         void printChildren();
