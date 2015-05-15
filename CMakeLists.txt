@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
-SET(GCC_COVERAGE_COMPILE_FLAGS "-std=c++14")
+SET(GCC_COVERAGE_COMPILE_FLAGS "-std=c++14 -g")
 
 # Locate GTest
 find_package(GTest REQUIRED)

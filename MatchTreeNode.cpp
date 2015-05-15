@@ -77,7 +77,7 @@ char MatchTreeNode::getChar() {
 }
 
 char MatchTreeNode::getNextChar() {
-  return nextChar;
+    return nextChar;
 }
 
 void MatchTreeNode::printChildren()
