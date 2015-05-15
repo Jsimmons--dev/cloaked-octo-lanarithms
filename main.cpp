@@ -1,7 +1,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "MatchTree.hpp"
+
 #include "MatchTreeNode.hpp"
+
 #define INPUT_ROWS 20
 using namespace std;
 
@@ -62,9 +65,9 @@ void solveProblem(vector<string> &problem)
     }
 }
 
-vector<MatchTreeNode*> extractMatches(vector<string> &problem)
+vector<MatchTree*> extractMatches(vector<string> &problem)
 {
-    vector<MatchTreeNode*> matches;
+    vector<MatchTree*> matches;
     string keyword = problem[0];
     int itPos = 0;
     for(vector<string>::iterator it = problem.begin()+1; it!=problem.end(); ++it)
@@ -76,16 +79,17 @@ vector<MatchTreeNode*> extractMatches(vector<string> &problem)
             {
                 int x = itPos;
                 int y = i;
-                MatchTreeNode* newMatch = new MatchTreeNode(x,y);
+                MatchTree* newMatchTree = new MatchTree(x,y, keyword[0], keyword[1]);
                 cout << problemLine[i] << endl;
-                matches.push_back(newMatch);
+                matches.push_back(newMatchTree);
             }
+
        }
        itPos++;
     }
     for(int i = 0;i<matches.size();i++)
     {
-        matches[i]->printNode();
+        matches[i]->getRoot()->printNode();
     }
     return matches;
 }
