@@ -9,13 +9,18 @@ MatchTreeNode::MatchTreeNode(int initX, int initY, int kwi, char thisc, char nex
     keywordIndex = kwi;
     thisChar = thisc;
     nextChar = nextc;
-    leaves->push_back(this);
-    cout << "MatchTreeNode created" << endl;
+    vector<MatchTreeNode*>::iterator itr = leaves->begin();
+    leaves->insert(itr, this);
+    // cout << "MatchTreeNode created, char: " << thisChar << endl;
 }
 
-vector<MatchTreeNode*> MatchTreeNode::getParents()
+MatchTreeNode* MatchTreeNode::getParent()
 {
-    return parents;
+    return parent;
+}
+
+void MatchTreeNode::setParent(MatchTreeNode* p){
+  parent = p;
 }
 
 vector<MatchTreeNode*> MatchTreeNode::getChildren()

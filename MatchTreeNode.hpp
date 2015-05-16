@@ -12,7 +12,7 @@ class MatchTreeNode {
     int keywordIndex;
     char thisChar;
     char nextChar;
-    std::vector<MatchTreeNode*> parents;
+    MatchTreeNode* parent = NULL;
     std::vector<MatchTreeNode*> children;
     public:
         MatchTreeNode(int,int,int, char, char, std::vector<MatchTreeNode*>*);
@@ -20,6 +20,8 @@ class MatchTreeNode {
         std::vector<MatchTreeNode*> getChildren();
         MatchTreeNode* getChild(int);
         MatchTreeNode* addChild(MatchTreeNode*);
+        void setParent(MatchTreeNode*);
+        MatchTreeNode* getParent();
         bool equals(MatchTreeNode*);
         int getX();
         int getY();
